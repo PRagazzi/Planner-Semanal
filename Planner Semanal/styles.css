@@ -70,22 +70,38 @@ h2{
 .task-list li{
     background-color: rgb(248, 100, 14);
     color: black;
-    margin-bottom: 8px;
-    padding: 8px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
     border-radius: 4px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
+    overflow: hidden; /* Faz com que o conteúdo excedente não ultrapasse*/
+    border: 1px solid #ccc;
+
+}
+
+.task-text {
+    word-wrap: break-word; /* Quebrando o texto em várias linhas */
+    white-space: normal;
+    font-size: 1rem;
+    overflow-wrap: break-word;
+    width: 100%;
 }
 
 .task-list li button{
     background-color: rgb(134, 70, 43);
+    font-size: 0.9rem;
+    margin-left: 10px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 4px;
     color: white;
-    padding: 5px;
+    padding: 5px 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    white-space: nowrap; /* Impede a quebra de texto do botão*/
 }
 
 .task-list li button:hover{

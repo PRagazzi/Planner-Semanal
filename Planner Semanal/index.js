@@ -8,13 +8,34 @@ function addTask(dayElement) {
     }
 
     const taskItem = document.createElement("li")
-    taskItem.textContent = taskText
+    
 
+    // Criando o botão de remover tarefa
     const removeBtn = document.createElement("button")
     removeBtn.textContent = "Remover"
     removeBtn.addEventListener("click", function(){
         taskItem.remove()
     })
+
+
+    // Criando uma span para organizar o texto da li
+    const taskTextSpan = document.createElement("span")
+    taskTextSpan.classList.add("task-text") // Adicionando a classe para estilizar
+    taskTextSpan.textContent = taskText
+
+    // Adicionando a possibilidade de edição de tarefas
+    const editBtn = document.createElement("button")
+    editBtn.textContent = "Editar"
+    editBtn.addEventListener("click", function () {
+        const editarTarefa = window.prompt("Editando...", taskTextSpan.textContent)
+        if (editarTarefa !== null & editarTarefa.trim() !== "") {
+            taskTextSpan.textContent = editarTarefa.trim()
+        }
+    })
+
+    taskItem.appendChild(taskTextSpan)
+
+    taskItem.appendChild(editBtn)
 
     taskItem.appendChild(removeBtn)
 
