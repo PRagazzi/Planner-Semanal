@@ -9,6 +9,8 @@ function addTask(dayElement) {
 
     const taskItem = document.createElement("li")
     
+    const divButtons = document.createElement("div")
+    divButtons.classList.add("div-buttons") // Adicionando a classe para estilizar
 
     // Criando o botão de remover tarefa
     const removeBtn = document.createElement("button")
@@ -35,9 +37,11 @@ function addTask(dayElement) {
 
     taskItem.appendChild(taskTextSpan)
 
-    taskItem.appendChild(editBtn)
+    taskItem.appendChild(divButtons)
 
-    taskItem.appendChild(removeBtn)
+    divButtons.appendChild(editBtn)
+
+    divButtons.appendChild(removeBtn)
 
     const taskList = dayElement.querySelector(".task-list")
     taskList.appendChild(taskItem)

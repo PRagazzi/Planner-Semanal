@@ -86,6 +86,7 @@ h2{
     word-wrap: break-word; /* Quebrando o texto em várias linhas */
     white-space: normal;
     font-size: 1rem;
+    padding :5px;
     overflow-wrap: break-word;
     width: 100%;
 }
@@ -98,7 +99,7 @@ h2{
     border: none;
     border-radius: 4px;
     color: white;
-    padding: 5px 10px;
+    padding: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
     white-space: nowrap; /* Impede a quebra de texto do botão*/
@@ -106,4 +107,10 @@ h2{
 
 .task-list li button:hover{
     background-color: rgb(211, 113, 71);
+}
+
+.div-buttons {
+
+    display: inline-flex;
+
 }
