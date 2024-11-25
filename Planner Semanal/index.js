@@ -29,7 +29,21 @@ function addTask(dayElement) {
     removeBtn.textContent = "Remover"
     removeBtn.addEventListener("click", function(){
         taskItem.remove()
+        verificarListaVazia(dayElement)
     })
+
+    // Criando botão de remover todas as tarefas
+    if(!dayElement.querySelector(".removeAllBtn")){
+        const removeAll = document.createElement("button")
+        removeAll.textContent = "Remover Todas"
+        removeAll.classList.add("removeAllBtn")
+        removeAll.addEventListener("click", function (){
+            taskList.innerHTML = ""
+            verificarListaVazia(dayElement) // Verifica se ainda ficou alguma tarefa na ul
+        })
+
+        taskList.parentElement.appendChild(removeAll)
+    }
 
     // Criando uma span para organizar o texto da li
     const taskTextSpan = document.createElement("span")
@@ -75,3 +89,12 @@ document.querySelectorAll(".day").forEach(dayElement => {
         addTask(dayElement)
     })
 })
+
+function verificarListaVazia(dayElement){
+    const taskList = dayElement.querySelector(".task-list")
+    const removeAllButton = dayElement.querySelector(".removeAllBtn")
+
+    if(taskList.children.length === 0 && removeAllButton){
+        removeAllButton.remove() // Remove o botão "Remover Todas", caso a lista esteja vazia
+    }
+}
