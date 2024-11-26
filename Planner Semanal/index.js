@@ -5,7 +5,7 @@ function addTask(dayElement) {
     mensagemErro.forEach(msg => msg.remove())
 
     if(taskText === ""){
-        exibirErro(taskInput,"Por favor, insira uma tarefa.")
+        exibirErro(taskInput,"Por favor, insira uma tarefa.", "red")
         return
     }
 
@@ -14,7 +14,7 @@ function addTask(dayElement) {
     const taskExistente = taskList.querySelectorAll(".task-text")
     for(const task of taskExistente){
         if(task.textContent === taskText){
-            exibirErro(taskInput, "Tarefa já adicionada!")
+            exibirErro(taskInput, "Tarefa já adicionada!", "red")
             taskInput.value = ""
             return
         }
@@ -55,20 +55,44 @@ function addTask(dayElement) {
     const editBtn = document.createElement("button")
     editBtn.textContent = "Editar"
     editBtn.addEventListener("click", function () {
-        const editarTarefa = window.prompt("Editando...", taskTextSpan.textContent)
-        if (editarTarefa !== null & editarTarefa.trim() !== "") {
-            const taskAtualizada = editarTarefa.trim()
-            
-            // Adicionando o teste de duplicidade na edição de tarefas
+        const edicaoInput = document.createElement("input")
+        edicaoInput.type = "text"
+        edicaoInput.value = taskTextSpan.textContent // Colocando o texto dentro do input
+        edicaoInput.classList.add("edicaoInput")
+
+        taskTextSpan.replaceWith(edicaoInput) // Substituindo o texto pelo input edição
+
+        const confirmarEdicao = () => {
+            const taskAtualizada = edicaoInput.value.trim()
+
+            // Removendo mensagens de erro existentes antes da validação
+            const mensagensErro = dayElement.querySelectorAll(".mensagemErro")
+            mensagensErro.forEach(msg => msg.remove())
+
+            if (taskAtualizada === ""){
+                exibirErro(edicaoInput, "O texto da tarefa não pode ser vazio!", "black")
+                return
+            }
+
             const taskAtual = taskList.querySelectorAll(".task-text")
             for(const task of taskAtual){
-                if(task !== taskTextSpan && task.textContent === taskAtualizada){
-                    window.alert("Essa tarefa já existe!")
+                if (task !== taskTextSpan && task.textContent === taskAtualizada){
+                    exibirErro(edicaoInput, "Essa tarefa já existe!", "black")
                     return
                 }
             }
+
             taskTextSpan.textContent = taskAtualizada
+
+            edicaoInput.replaceWith(taskTextSpan)
         }
+        
+        edicaoInput.addEventListener("blur", confirmarEdicao)
+        edicaoInput.addEventListener("keydown", function (event){ // Quando pressionar enter, alterará a tarefa
+            if(event.key === "Enter") confirmarEdicao()
+        })
+        edicaoInput.focus()
+        
     })
 
     taskItem.appendChild(taskTextSpan)
@@ -102,10 +126,10 @@ function verificarListaVazia(dayElement){
     }
 }
 
-function exibirErro (input, mensagem) {
+function exibirErro (input, mensagem, cor) {
     const elementoErro = document.createElement("div")
     elementoErro.classList.add("mensagemErro")
-    elementoErro.style.color = "red"
+    elementoErro.style.color = cor
     elementoErro.textContent = mensagem
     input.insertAdjacentElement("afterend", elementoErro)
 }

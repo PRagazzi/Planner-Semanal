@@ -78,7 +78,8 @@ h2{
     justify-content: flex-start;
     align-items: center;
     overflow: hidden; /* Faz com que o conteúdo excedente não ultrapasse*/
-    border: 1px solid #ccc;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 
 }
 
@@ -135,4 +136,12 @@ h2{
 .mensagemErro {
     margin-bottom: 5px;
     font-size: 0.85rem;
+}
+
+.edicaoInput {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: rgb(237, 200, 155);
 }
