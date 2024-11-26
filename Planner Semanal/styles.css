@@ -131,3 +131,8 @@ h2{
 .removeAllBtn:hover{
     background-color: rgba(255, 68, 0, 0.451);
 }
+
+.mensagemErro {
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+}

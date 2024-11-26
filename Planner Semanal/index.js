@@ -1,19 +1,20 @@
 function addTask(dayElement) {
     const taskInput = dayElement.querySelector(".task-input")
     const taskText =  taskInput.value.trim()
+    const mensagemErro = dayElement.querySelectorAll(".mensagemErro")
+    mensagemErro.forEach(msg => msg.remove())
 
     if(taskText === ""){
-        window.alert("Por favor, insira uma tarefa.")
+        exibirErro(taskInput,"Por favor, insira uma tarefa.")
         return
     }
-
 
     // Verificando se há duplicação de tarefas
     const taskList = dayElement.querySelector(".task-list")
     const taskExistente = taskList.querySelectorAll(".task-text")
     for(const task of taskExistente){
         if(task.textContent === taskText){
-            window.alert("Tarefa já adicionada!")
+            exibirErro(taskInput, "Tarefa já adicionada!")
             taskInput.value = ""
             return
         }
@@ -93,8 +94,18 @@ document.querySelectorAll(".day").forEach(dayElement => {
 function verificarListaVazia(dayElement){
     const taskList = dayElement.querySelector(".task-list")
     const removeAllButton = dayElement.querySelector(".removeAllBtn")
+    const mensagemErro = dayElement.querySelector(".mensagemErro")
 
     if(taskList.children.length === 0 && removeAllButton){
         removeAllButton.remove() // Remove o botão "Remover Todas", caso a lista esteja vazia
+        mensagemErro.textContent = ""
     }
+}
+
+function exibirErro (input, mensagem) {
+    const elementoErro = document.createElement("div")
+    elementoErro.classList.add("mensagemErro")
+    elementoErro.style.color = "red"
+    elementoErro.textContent = mensagem
+    input.insertAdjacentElement("afterend", elementoErro)
 }
