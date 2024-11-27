@@ -107,7 +107,23 @@ function addTask(dayElement) {
     taskInput.value = ""
     taskInput.placeholder = "Adicionar Tarefa"
 }
+const frasesMotivacionais = [
+    '"O sucesso é a soma de pequenos esforços repetidos dia após dia!"',
+    '"Não desista! Grandes coisas levam tempo!"',
+    '"Acredite em você e tudo será possível!"',
+    '"Se você pode sonhar, você pode realizar!"',
+    '"A persistência é o caminho do êxito!"',
+    '"Cada tarefa concluída é um passo mais perto do seu objetivo!"',
+    '"A mudança começa com uma decisão!"',
+    '"Você é mais forte do que imagina!"',
+    '"Foque no que importa e faça acontecer!"'
+]
 
+document.addEventListener("DOMContentLoaded", () => {
+    const elementoFrase = document.querySelector("#fraseMotivacional")
+    const fraseAleatoria = gerarFraseAleatoria(frasesMotivacionais)
+    elementoFrase.textContent = fraseAleatoria
+})
 document.querySelectorAll(".day").forEach(dayElement => {
     const addButton = dayElement.querySelector(".add-btn")
     addButton.addEventListener("click", function(){
@@ -132,4 +148,9 @@ function exibirErro (input, mensagem, cor) {
     elementoErro.style.color = cor
     elementoErro.textContent = mensagem
     input.insertAdjacentElement("afterend", elementoErro)
+}
+
+function gerarFraseAleatoria(frases) {
+    const indiceAleatorio = Math.floor(Math.random() * frases.length)
+    return frases[indiceAleatorio]
 }

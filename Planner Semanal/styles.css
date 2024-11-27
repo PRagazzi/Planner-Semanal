@@ -13,6 +13,17 @@ body{
     padding: 20px;
 }
 
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+#fraseMotivacional {
+    font-size: 1.5rem;
+    color: black;
+    font-style: italic;
+}
+
 h1{
     color:rgb(154, 95, 24);
     margin-bottom: 20px;
